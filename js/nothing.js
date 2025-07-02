@@ -73,14 +73,24 @@
         }
    ]
     async function newVenue(venue) {
-        const response = await fetch('http://localhost/venue_maneger/api/nothing.php', {
+        const response = await fetch('http://localhost/venue-manager/api/users/nothing.php', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                body: JSON.stringify({
+                    name: venue.name,
+                    location: venue.location,
+                    capacity: venue.capacity,
+                    exam_capacity_1: venue.exam_capacity_1,
+                    exam_capacity_2: venue.exam_capacity_2,
+                    facilities: venue.facilities,
+                    image: venue.image,
+                    status: venue.status,
+                    description: venue.description
+                })
             },
-            body: JSON.stringify(venue)
-        });
-        if (!response.ok) {
+            });   
+            if (!response.ok) {
             alert('Error: ' + response.statusText);
             throw new Error('Failed to add new venue');
         }
