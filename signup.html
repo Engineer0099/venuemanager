@@ -13,7 +13,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="assets/icon.jpg" alt="Venue Manager" class="logo-icon">
+                <img src="assets/vm.jpg" alt="Venue Manager" class="logo-icon">
                 <span class="logo-text">Venue Manager</span>
             </div>
             <div class="nav-menu" id="nav-menu">
@@ -39,7 +39,7 @@
         <div class="container">
             <div class="form-container">
                 <h1 class="form-title">Create an Account</h1>
-                <form id="signup-form" >
+                <form id="signup-form myForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="fname">First Name *</label>
@@ -134,7 +134,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-logo">
-                        <img src="assets/icon.jpg" alt="Venue Manager" class="logo-icon">
+                        <img src="assets/vm.jpg" alt="Venue Manager" class="logo-icon">
                         <span class="logo-text">Venue Manager</span>
                     </div>
                     <p>Streamlining venue management for educational institutions</p>
@@ -151,7 +151,7 @@
                 <div class="footer-section">
                     <h4>Contact</h4>
                     <p>Email: info@venuemanager.edu</p>
-                    <p>Phone: +1 (555) 123-4567</p>
+                    <p>Phone: +255 782 254 391</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -180,6 +180,30 @@
             }
         }
         document.getElementById('role').addEventListener('change', toggleStudentIdField);
+
+
+        document.getElementById('myForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
+            
+            // Collect form data
+            const formData = new FormData(this);
+
+            //send data to the database using fetch API
+            fetch('http://localhost/venue-manager/api/users/create.php', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(response => {
+                alert('User registered successfully!');
+                console.log(response);
+                // window.location.href = 'login.html';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while registering the user.');
+            });
+        });
     </script>
 </body>
 </html>

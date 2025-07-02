@@ -412,17 +412,15 @@ function isValidPhone(phone) {
 function saveUser(userData) {
     alert('register.......');
     let users = JSON.parse(localStorage.getItem('venueManagerUsers') || '[]');
-    users.forEach(user => {
-        alert(user.email);
-        alert(user.fname);
-    });
     users.push(userData);
+    alert(typeof userData);
     localStorage.setItem('venueManagerUsers', JSON.stringify(users));
 
+    alert(typeof userData);
     const response = registerUser(userData);
     async function registerUser(userData) {
         try {
-            const res = await fetch('http://localhost/venue-manager/api/users/test.php', {
+            const res = await fetch('http://localhost/venue-manager/api/users/create.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

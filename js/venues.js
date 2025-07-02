@@ -22,7 +22,7 @@ function loadExtendedVenues() {
             examCapacity1: 135,
             examCapacity2: 125,
             facilities: ['projector', 'whiteboard'],
-            image: 'assets/icon.jpg',
+            image: 'assets/t1.jpg',
             status: 'free',
             description: 'Large lecture venue suitable for night sessions and exams with a lot of attendees.'
         },
@@ -34,7 +34,7 @@ function loadExtendedVenues() {
             examCapacity1: 135,
             examCapacity2: 125,
             facilities: ['projector', 'whiteboard'],
-            image: 'assets/image.jpg',
+            image: 'assets/t2.jpg',
             status: 'timetable',
             description: 'Large lecture venue suitable for night sessions and exams with a lot of attendees.'
         },
@@ -46,7 +46,7 @@ function loadExtendedVenues() {
             examCapacity1: 135,
             examCapacity2: 125,
             facilities: ['projector', 'whiteboard'],
-            image: 'assets/logo.jpg',
+            image: 'assets/t4.jpg',
             status: 'booked',
             description: 'Large lecture venue suitable for night sessions and exams with a lot of attendees.'
         },
@@ -58,7 +58,7 @@ function loadExtendedVenues() {
             examCapacity1: 135,
             examCapacity2: 125,
             facilities: ['projector', 'whiteboard'],
-            image: 'assets/icon.jpg',
+            image: 'assets/t4.jpg',
             status: 'free',
             description: 'Large lecture venue suitable for night sessions and exams with a lot of attendees.'
         },
@@ -70,7 +70,7 @@ function loadExtendedVenues() {
             examCapacity1: 100,
             examCapacity2: 80,
             facilities: ['projector', 'whiteboard'],
-            image: 'assets/icon.jpg',
+            image: 'assets/twoone.jpg',
             status: 'free',
             description: 'Large lecture venue suitable for exams and presentations with a lot of attendees.'
         },
@@ -82,26 +82,24 @@ function loadExtendedVenues() {
             examCapacity1: 100,
             examCapacity2: 80,
             facilities: ['whiteboard','projector'],
-            image: 'assets/logo.jpg',
+            image: 'assets/twoone.jpg',
             status: 'timetable',
             description: 'Large lecture venue suitable for exams and presentations with a lot of attendees.'
         }
     ];
-}
-
-// Setup event listeners for venues page
-function setupVenueEventListeners() {
-    const searchInput = document.getElementById('venue-search');
-    if (searchInput) {
-        searchInput.addEventListener('input', debounce(searchVenuesByText, 300));
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                searchVenuesByText();
-            }
+    // Fetch venues from PHP backend
+    fetch('http://localhost/venue-manager/api/users/create.php')
+        .then(response => response.json())
+        .then(data => {
+            venues = data;
+            displayVenues(venues);
+        })
+        .catch(error => {
+            console.error('Error fetching venues:', error);
+            // venues = [];
+            // displayVenues([]);
         });
-    }
 }
-
 // Display venues in grid
 function displayVenues(venuesToDisplay) {
     const venueGrid = document.getElementById('venue-grid');

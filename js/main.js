@@ -111,6 +111,7 @@ function updateUserNavigation() {
         if (userMenu) {
             userMenu.textContent = `Welcome, ${currentUser.fname}`;
             userMenu.style.display = 'block';
+            document.getElementById('sign-in').style.display = 'none';
             userMenu.onclick = toggleUserDropdown;
         }
         
