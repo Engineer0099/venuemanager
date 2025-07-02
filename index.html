@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venue Manager - Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/icon.jpg" alt="Venue Manager" class="logo-icon">
+                <span class="logo-text">Venue Manager</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="venues.html" class="nav-link">Venues</a>
+                <a href="booking.html" class="nav-link">Book Now</a>
+                <a href="my-bookings.html" class="nav-link user-only" style="display: none;">My Bookings</a>
+                <a href="profile.html" class="nav-link user-only" style="display: none;">Profile</a>
+                <a href="admin.html" class="nav-link admin-link" id="admin-link" style="display: none;">Admin</a>
+                <a href="login.html" class="nav-link" id="sign-in">Sign In</a>
+                <a href="#" class="nav-link user-menu" id="user-menu" style="display: none;">Welcome, User</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Welcome to Venue Manager</h1>
+                <p>Streamline your venue booking process with our comprehensive management system. Book meeting rooms, classrooms, and conference halls with ease.</p>
+                <div class="hero-buttons">
+                    <a href="booking.html" class="btn btn-primary">Book Now</a>
+                    <a href="venues.html" class="btn btn-secondary">View Venues</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/image.jpg" alt="Modern Meeting Room">
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+        <div class="container">
+            <h2>Quick Actions</h2>
+            <div class="actions-grid">
+                <div class="action-card">
+                    <img src="assets/logo.jpg" alt="View Venues" class="action-icon">
+                    <h3>View All Venues</h3>
+                    <p>Browse available venues and their facilities</p>
+                    <a href="venues.html" class="btn btn-outline">View Venues</a>
+                </div>
+                <div class="action-card">
+                    <img src="assets/image.jpg" alt="Check Availability" class="action-icon">
+                    <h3>Check Availability</h3>
+                    <p>Search for available venues by date and time</p>
+                    <a href="booking.html" class="btn btn-outline">Check Now</a>
+                </div>
+                <div class="action-card">
+                    <img src="assets/icon.jpg" alt="Book Venue" class="action-icon">
+                    <h3>Book a Venue</h3>
+                    <p>Reserve a venue for your event or meeting</p>
+                    <a href="booking.html" class="btn btn-outline">Book Now</a>
+                </div>
+                <div class="action-card">
+                    <img src="assets/logo.jpg" alt="Sign In" class="action-icon">
+                    <h3>Sign In / Register</h3>
+                    <p>Access your account or create a new one</p>
+                    <a href="login.html" class="btn btn-outline">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Search -->
+    <section class="quick-search">
+        <div class="container">
+            <h2>Quick Search</h2>
+            <div class="search-form">
+                <div class="search-row">
+                    <div class="form-group">
+                        <label for="search-date">Date</label>
+                        <input type="date" id="search-date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="search-start-time">Start Time</label>
+                        <input type="time" id="search-start-time" name="start-time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="search-end-time">End Time</label>
+                        <input type="time" id="search-end-time" name="end-time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="search-capacity">Capacity</label>
+                        <input type="number" id="search-capacity" name="capacity" placeholder="Min. seats" min="1">
+                    </div>
+                </div>
+                <div class="search-filters">
+                    <div class="filter-group">
+                        <label>Facilities:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="projector" name="facilities" value="projector">
+                                <span class="checkmark"></span>
+                                Projector
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="computer" name="facilities" value="computer">
+                                <span class="checkmark"></span>
+                                Computer
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="whiteboard" name="facilities" value="whiteboard">
+                                <span class="checkmark"></span>
+                                Whiteboard
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary search-btn" onclick="searchVenues()">Search Available Venues</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Easy Booking</h3>
+                    <p>Simple and intuitive booking process with real-time availability checking</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Venue Management</h3>
+                    <p>Comprehensive venue information with facilities and capacity details</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>User Roles</h3>
+                    <p>Different access levels for students, lecturers, and administrators</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Admin Dashboard</h3>
+                    <p>Powerful admin tools for managing venues, bookings, and timetables</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Search</h3>
+                    <p>Search for available venues based on your requirements</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Select</h3>
+                    <p>Choose the perfect venue from the available options</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Book</h3>
+                    <p>Complete your booking with all necessary details</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Confirm</h3>
+                    <p>Receive confirmation and manage your booking</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/icon.jpg" alt="Venue Manager" class="logo-icon">
+                        <span class="logo-text">Venue Manager</span>
+                    </div>
+                    <p>Streamlining venue management for educational institutions</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="venues.html">Venues</a></li>
+                        <li><a href="booking.html">Book Now</a></li>
+                        <li><a href="login.html">Sign In</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@venuemanager.edu</p>
+                    <p>Phone: +255 782 254 391</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Venue Manager System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>
+
+
+<a href="admin.html" class="nav-link admin-link" id="admin-link" style="display: none;">Admin</a>
+

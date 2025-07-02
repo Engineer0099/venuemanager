@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Venue - Venue Manager</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/venue-icon.png" alt="Venue Manager" class="logo-icon">
+                <span class="logo-text">Venue Manager</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="venues.html" class="nav-link">Venues</a>
+                <a href="booking.html" class="nav-link active">Book Now</a>
+                <a href="my-bookings.html" class="nav-link user-only" style="display: none;">My Bookings</a>
+                <a href="profile.html" class="nav-link user-only" style="display: none;">Profile</a>
+                <a href="login.html" class="nav-link" id="sign-in">Sign In</a>
+                <a href="#" class="nav-link user-menu" id="user-menu" style="display: none;">Welcome, User</a>
+                <a href="admin.html" class="nav-link admin-link" id="admin-link" style="display: none;">Admin</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="margin-top: 80px; padding: 2rem 0;">
+        <div class="container">
+            <div class="form-container">
+                <h1 class="form-title">Book a Venue</h1>
+                
+                <!-- Selected Venue Display -->
+                <div id="selected-venue" class="selected-venue" style="display: none;">
+                    <h3>Selected Venue</h3>
+                    <div id="venue-display"></div>
+                </div>
+
+                <!-- Booking Form -->
+                <form id="booking-form" class="booking-form">
+                    <div class="form-section">
+                        <h3>Booking Details</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="booking-date">Date *</label>
+                                <input type="date" id="booking-date" name="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="booking-start-time">Start Time *</label>
+                                <input type="time" id="booking-start-time" name="start-time" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="booking-end-time">End Time *</label>
+                                <input type="time" id="booking-end-time" name="end-time" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="purpose">Purpose *</label>
+                                <select id="purpose" name="purpose" required>
+                                    <option value="">Select purpose</option>
+                                    <option value="exam">Exam</option>
+                                    <option value="practical">Practical Session</option>
+                                    <option value="lecture">Lecture</option>
+                                    <option value="meeting">Meeting</option>
+                                    <option value="seminar">Seminar</option>
+                                    <option value="workshop">Workshop</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="attendees">Number of Attendees *</label>
+                                <input type="number" id="attendees" name="attendees" min="1" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Required Facilities</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="requirements" value="projector">
+                                    <span class="checkmark"></span>
+                                    Projector
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="requirements" value="computer">
+                                    <span class="checkmark"></span>
+                                    Computer
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="requirements" value="whiteboard">
+                                    <span class="checkmark"></span>
+                                    Whiteboard
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="requirements" value="microphone">
+                                    <span class="checkmark"></span>
+                                    Microphone
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notes">Additional Notes</label>
+                            <textarea id="notes" name="notes" placeholder="Any special requirements or notes..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Venue Selection Section -->
+                    <div class="form-section" id="venue-selection-section">
+                        <h3>Venue Selection</h3>
+                        <p>Based on your requirements, here are the suggested venues:</p>
+                        <div id="suggested-venues" class="suggested-venues">
+                            <!-- Venues will be populated by JavaScript -->
+                        </div>
+                        <button type="button" class="btn btn-outline" onclick="searchMoreVenues()">
+                            Search More Venues
+                        </button>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="#" onclick="showTerms()">Terms and Conditions</a> *
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="submit-booking">
+                            Submit Booking Request
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                            Reset Form
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/venue-icon.png" alt="Venue Manager" class="logo-icon">
+                        <span class="logo-text">Venue Manager</span>
+                    </div>
+                    <p>Streamlining venue management for educational institutions</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="venues.html">Venues</a></li>
+                        <li><a href="booking.html">Book Now</a></li>
+                        <li><a href="login.html">Sign In</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@venuemanager.edu</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Venue Manager System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/booking.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings - Venue Manager</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/venue-icon.png" alt="Venue Manager" class="logo-icon">
+                <span class="logo-text">Venue Manager</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="venues.html" class="nav-link">Venues</a>
+                <a href="booking.html" class="nav-link">Book Now</a>
+                <a href="my-bookings.html" class="nav-link active">My Bookings</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+                <a href="#" class="nav-link user-menu" id="user-menu">Welcome, User</a>
+                <a href="admin.html" class="nav-link admin-link" id="admin-link" style="display: none;">Admin</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="margin-top: 80px; padding: 2rem 0;">
+        <div class="container">
+            <div class="bookings-header">
+                <h1 class="page-title">My Bookings</h1>
+                <div class="bookings-summary">
+                    <div class="summary-card">
+                        <span class="summary-number" id="total-bookings-count">0</span>
+                        <span class="summary-label">Total Bookings</span>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-number" id="upcoming-bookings-count">0</span>
+                        <span class="summary-label">Upcoming</span>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-number" id="past-bookings-count">0</span>
+                        <span class="summary-label">Past</span>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-number" id="cancelled-bookings-count">0</span>
+                        <span class="summary-label">Cancelled</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters and Controls -->
+            <div class="bookings-controls">
+                <div class="controls-row">
+                    <div class="search-group">
+                        <input type="text" id="bookings-search" placeholder="Search bookings..." class="search-input">
+                        <button class="btn btn-outline" onclick="searchBookings()">Search</button>
+                    </div>
+                    <div class="filter-group">
+                        <label for="status-filter">Status:</label>
+                        <select id="status-filter" onchange="filterBookings()">
+                            <option value="">All Statuses</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="pending">Pending</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="date-filter">Date Range:</label>
+                        <select id="date-filter" onchange="filterBookings()">
+                            <option value="">All Dates</option>
+                            <option value="upcoming">Upcoming</option>
+                            <option value="past">Past</option>
+                            <option value="today">Today</option>
+                            <option value="this-week">This Week</option>
+                            <option value="this-month">This Month</option>
+                        </select>
+                    </div>
+                    <div class="sort-group">
+                        <label for="sort-bookings">Sort by:</label>
+                        <select id="sort-bookings" onchange="sortBookings()">
+                            <option value="date-desc">Date (Newest First)</option>
+                            <option value="date-asc">Date (Oldest First)</option>
+                            <option value="venue">Venue Name</option>
+                            <option value="status">Status</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="controls-row">
+                    <div class="view-toggle">
+                        <button class="view-btn active" onclick="setBookingsView('list')" data-view="list">
+                            📋 List View
+                        </button>
+                        <button class="view-btn" onclick="setBookingsView('calendar')" data-view="calendar">
+                            📅 Calendar View
+                        </button>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="window.location.href='booking.html'">
+                            + New Booking
+                        </button>
+                        <button class="btn btn-outline" onclick="exportBookings()">
+                            📄 Export
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bookings List View -->
+            <div id="bookings-list-view" class="bookings-view active">
+                <div id="bookings-list" class="bookings-list">
+                    <!-- Bookings will be populated by JavaScript -->
+                </div>
+                
+                <!-- No Bookings Message -->
+                <div id="no-bookings" class="no-results" style="display: none;">
+                    <div class="no-results-icon">📅</div>
+                    <h3>No bookings found</h3>
+                    <p>You haven't made any bookings yet, or no bookings match your current filters.</p>
+                    <button class="btn btn-primary" onclick="window.location.href='booking.html'">
+                        Make Your First Booking
+                    </button>
+                </div>
+            </div>
+
+            <!-- Calendar View -->
+            <div id="bookings-calendar-view" class="bookings-view">
+                <div class="calendar-header">
+                    <button class="btn btn-outline" onclick="previousMonth()">‹ Previous</button>
+                    <h2 id="calendar-month-year">January 2025</h2>
+                    <button class="btn btn-outline" onclick="nextMonth()">Next ›</button>
+                </div>
+                <div id="calendar-grid" class="calendar-grid">
+                    <!-- Calendar will be populated by JavaScript -->
+                </div>
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <span class="legend-color confirmed"></span>
+                        <span>Confirmed</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color pending"></span>
+                        <span>Pending</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color cancelled"></span>
+                        <span>Cancelled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/venue-icon.png" alt="Venue Manager" class="logo-icon">
+                        <span class="logo-text">Venue Manager</span>
+                    </div>
+                    <p>Streamlining venue management for educational institutions</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="venues.html">Venues</a></li>
+                        <li><a href="booking.html">Book Now</a></li>
+                        <li><a href="my-bookings.html">My Bookings</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@venuemanager.edu</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Venue Manager System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/my-bookings.js"></script>
+</body>
+</html>
+

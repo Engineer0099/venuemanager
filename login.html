@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Venue Manager</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/venue-icon.png" alt="Venue Manager" class="logo-icon">
+                <span class="logo-text">Venue Manager</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="venues.html" class="nav-link">Venues</a>
+                <a href="booking.html" class="nav-link">Book Now</a>
+                <a href="my-bookings.html" class="nav-link user-only" style="display: none;">My Bookings</a>
+                <a href="profile.html" class="nav-link user-only" style="display: none;">Profile</a>
+                <a href="login.html" class="nav-link active" id="sign-in">Sign In</a>
+                <a href="#" class="nav-link user-menu" id="user-menu" style="display: none;">Welcome, User</a>
+                <a href="admin.html" class="nav-link admin-link" id="admin-link" style="display: none;">Admin</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="margin-top: 80px; padding: 2rem 0;">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="showLoginForm()">Sign In</button>
+                    <button class="auth-tab" onclick="showSignupForm()">Sign Up</button>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="login-form-container" class="form-container">
+                    <h1 class="form-title">Welcome Back</h1>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email Address *</label>
+                            <input type="email" id="login-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password *</label>
+                            <input type="password" id="login-password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="remember-me" name="remember">
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+                        </div>
+                        <div class="form-links">
+                            <a href="#" onclick="showForgotPassword()">Forgot your password?</a>
+                        </div>
+                    </form>
+                    
+                    <!-- Demo Accounts -->
+                    <div class="demo-accounts">
+                        <h3>Demo Accounts</h3>
+                        <p>Use these accounts to test the system:</p>
+                        <div class="demo-account-buttons">
+                            <button class="btn btn-outline" onclick="loginAsDemo('lecturer')">
+                                Login as Lecturer
+                            </button>
+                            <button class="btn btn-outline" onclick="loginAsDemo('admin')">
+                                Login as Admin
+                            </button>
+                            <button class="btn btn-outline" onclick="loginAsDemo('student')">
+                                Login as Student
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Signup Form -->
+                <div id="signup-form-container" class="form-container" style="display: none;">
+                    <h1 class="form-title">Create Account</h1>
+                    <form id="quick-signup-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="quick-fname">First Name *</label>
+                                <input type="text" id="quick-fname" name="fname" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="quick-lname">Last Name *</label>
+                                <input type="text" id="quick-lname" name="lname" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-email">Email Address *</label>
+                            <input type="email" id="quick-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-role">Role *</label>
+                            <select id="quick-role" name="role" required>
+                                <option value="">Select role</option>
+                                <option value="student">Student</option>
+                                <option value="lecturer">Lecturer</option>
+                                <option value="guest">Guest</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="quick-password">Password *</label>
+                                <input type="password" id="quick-password" name="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="quick-confirm-password">Confirm Password *</label>
+                                <input type="password" id="quick-confirm-password" name="confirm-password" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                        </div>
+                        <p class="text-center">
+                            <a href="signup.html">Need more options? Use full signup form</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/venue-icon.png" alt="Venue Manager" class="logo-icon">
+                        <span class="logo-text">Venue Manager</span>
+                    </div>
+                    <p>Streamlining venue management for educational institutions</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="venues.html">Venues</a></li>
+                        <li><a href="booking.html">Book Now</a></li>
+                        <li><a href="login.html">Sign In</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@venuemanager.edu</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Venue Manager System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
+

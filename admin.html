@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Venue Manager</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/venue-icon.png" alt="Venue Manager" class="logo-icon">
+                <span class="logo-text">Venue Manager</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="venues.html" class="nav-link">Venues</a>
+                <a href="booking.html" class="nav-link">Book Now</a>
+                <a href="my-bookings.html" class="nav-link user-only" style="display: none;">My Bookings</a>
+                <a href="profile.html" class="nav-link user-only" style="display: none;">Profile</a>
+                <a href="admin.html" class="nav-link active admin-link" id="admin-link" style="display: none;">Admin</a>
+                <a href="login.html" class="nav-link" id="sign-in">Sign In</a>
+                <a href="#" class="nav-link user-menu" id="user-menu" style="display: none;">Welcome, User</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="margin-top: 80px; padding: 2rem 0;">
+        <div class="container">
+            <!-- Admin Header -->
+            <div class="admin-header">
+                <div class="admin-title">
+                    <h1>Admin Panel</h1>
+                    <p>Manage timetables, venues, bookings, and system issues</p>
+                </div>
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="total-venues">8</span>
+                            <span class="stat-label">Total Venues</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="total-bookings">24</span>
+                            <span class="stat-label">Active Bookings</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚠️</div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="open-issues">3</span>
+                            <span class="stat-label">Open Issues</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="total-users">156</span>
+                            <span class="stat-label">Total Users</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Navigation Tabs -->
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="showAdminTab('dashboard')">
+                    📊 Dashboard
+                </button>
+                <button class="admin-tab" onclick="showAdminTab('timetable')">
+                    🗓️ Timetable Management
+                </button>
+                <button class="admin-tab" onclick="showAdminTab('issues')">
+                    ⚠️ Issue Management
+                </button>
+                <button class="admin-tab" onclick="showAdminTab('venues')">
+                    🏢 Venue Management
+                </button>
+                <button class="admin-tab" onclick="showAdminTab('users')">
+                    👥 User Management
+                </button>
+                <button class="admin-tab" onclick="showAdminTab('reports')">
+                    📈 Reports
+                </button>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard-tab" class="admin-tab-content active">
+                <div class="dashboard-grid">
+                    <!-- Recent Bookings -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Recent Bookings</h3>
+                            <button class="btn btn-outline btn-sm" onclick="refreshRecentBookings()">Refresh</button>
+                        </div>
+                        <div class="card-content">
+                            <div id="recent-bookings-list" class="recent-list">
+                                <!-- Recent bookings will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Alerts -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>System Alerts</h3>
+                            <span class="alert-count" id="alert-count">2</span>
+                        </div>
+                        <div class="card-content">
+                            <div id="system-alerts" class="alerts-list">
+                                <div class="alert-item warning">
+                                    <div class="alert-icon">⚠️</div>
+                                    <div class="alert-content">
+                                        <strong>Venue Maintenance</strong>
+                                        <p>Conference Room A requires projector maintenance</p>
+                                        <small>2 hours ago</small>
+                                    </div>
+                                </div>
+                                <div class="alert-item info">
+                                    <div class="alert-icon">ℹ️</div>
+                                    <div class="alert-content">
+                                        <strong>System Update</strong>
+                                        <p>Scheduled maintenance tonight at 2:00 AM</p>
+                                        <small>4 hours ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Quick Actions</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="quick-actions">
+                                <button class="action-btn" onclick="showAddTimetableModal()">
+                                    <div class="action-icon">➕</div>
+                                    <span>Add Timetable</span>
+                                </button>
+                                <button class="action-btn" onclick="showAddIssueModal()">
+                                    <div class="action-icon">🐛</div>
+                                    <span>Report Issue</span>
+                                </button>
+                                <button class="action-btn" onclick="showAddVenueModal()">
+                                    <div class="action-icon">🏢</div>
+                                    <span>Add Venue</span>
+                                </button>
+                                <button class="action-btn" onclick="generateReport()">
+                                    <div class="action-icon">📊</div>
+                                    <span>Generate Report</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Usage Statistics -->
+                    <div class="dashboard-card full-width">
+                        <div class="card-header">
+                            <h3>Usage Statistics</h3>
+                            <div class="chart-controls">
+                                <select id="chart-period" onchange="updateChart()">
+                                    <option value="week">This Week</option>
+                                    <option value="month" selected>This Month</option>
+                                    <option value="year">This Year</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div id="usage-chart" class="chart-container">
+                                <!-- Chart will be rendered here -->
+                                <canvas id="bookingChart" width="800" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timetable Management Tab -->
+            <div id="timetable-tab" class="admin-tab-content">
+                <div class="timetable-management">
+                    <div class="timetable-header">
+                        <h2>Timetable Management</h2>
+                        <div class="timetable-controls">
+                            <select id="timetable-view" onchange="changeTimetableView()">
+                                <option value="week">Week View</option>
+                                <option value="month">Month View</option>
+                                <option value="semester">Semester View</option>
+                            </select>
+                            <button class="btn btn-primary" onclick="showAddTimetableModal()">
+                                + Add Timetable Entry
+                            </button>
+                            <button class="btn btn-outline" onclick="exportTimetable()">
+                                📄 Export
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Timetable Filters -->
+                    <div class="timetable-filters">
+                        <div class="filter-group">
+                            <label for="venue-filter">Venue:</label>
+                            <select id="venue-filter" onchange="filterTimetable()">
+                                <option value="">All Venues</option>
+                                <option value="conference-a">Conference Room A</option>
+                                <option value="lecture-b">Lecture Hall B</option>
+                                <option value="seminar-c">Seminar Room C</option>
+                                <option value="computer-d">Computer Lab D</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="department-filter">Department:</label>
+                            <select id="department-filter" onchange="filterTimetable()">
+                                <option value="">All Departments</option>
+                                <option value="computer-science">Computer Science</option>
+                                <option value="mathematics">Mathematics</option>
+                                <option value="physics">Physics</option>
+                                <option value="chemistry">Chemistry</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="lecturer-filter">Lecturer:</label>
+                            <select id="lecturer-filter" onchange="filterTimetable()">
+                                <option value="">All Lecturers</option>
+                                <option value="john-smith">John Smith</option>
+                                <option value="sarah-johnson">Sarah Johnson</option>
+                                <option value="mike-wilson">Mike Wilson</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Timetable Grid -->
+                    <div class="timetable-container">
+                        <div id="timetable-grid" class="timetable-grid">
+                            <!-- Timetable will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Timetable List View -->
+                    <div class="timetable-list">
+                        <div class="list-header">
+                            <h3>Scheduled Classes</h3>
+                            <div class="list-controls">
+                                <input type="text" id="timetable-search" placeholder="Search classes..." onkeyup="searchTimetable()">
+                                <button class="btn btn-outline btn-sm" onclick="refreshTimetable()">Refresh</button>
+                            </div>
+                        </div>
+                        <div id="timetable-entries" class="timetable-entries">
+                            <!-- Timetable entries will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Issue Management Tab -->
+            <div id="issues-tab" class="admin-tab-content">
+                <div class="issue-management">
+                    <div class="issue-header">
+                        <h2>Issue Management</h2>
+                        <div class="issue-controls">
+                            <button class="btn btn-primary" onclick="showAddIssueModal()">
+                                + Report New Issue
+                            </button>
+                            <button class="btn btn-outline" onclick="exportIssues()">
+                                📄 Export Issues
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Issue Filters -->
+                    <div class="issue-filters">
+                        <div class="filter-group">
+                            <label for="issue-status-filter">Status:</label>
+                            <select id="issue-status-filter" onchange="filterIssues()">
+                                <option value="">All Statuses</option>
+                                <option value="open">Open</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="resolved">Resolved</option>
+                                <option value="closed">Closed</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="issue-priority-filter">Priority:</label>
+                            <select id="issue-priority-filter" onchange="filterIssues()">
+                                <option value="">All Priorities</option>
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                                <option value="critical">Critical</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="issue-category-filter">Category:</label>
+                            <select id="issue-category-filter" onchange="filterIssues()">
+                                <option value="">All Categories</option>
+                                <option value="technical">Technical</option>
+                                <option value="maintenance">Maintenance</option>
+                                <option value="booking">Booking</option>
+                                <option value="user-access">User Access</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <input type="text" id="issue-search" placeholder="Search issues..." onkeyup="searchIssues()">
+                        </div>
+                    </div>
+
+                    <!-- Issue Statistics -->
+                    <div class="issue-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" id="open-issues-count">5</span>
+                            <span class="stat-label">Open</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="in-progress-issues-count">3</span>
+                            <span class="stat-label">In Progress</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="resolved-issues-count">12</span>
+                            <span class="stat-label">Resolved</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="total-issues-count">20</span>
+                            <span class="stat-label">Total</span>
+                        </div>
+                    </div>
+
+                    <!-- Issues List -->
+                    <div id="issues-list" class="issues-list">
+                        <!-- Issues will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other tabs (placeholder content) -->
+            <div id="venues-tab" class="admin-tab-content">
+                <h2>Venue Management</h2>
+                <p>Venue management functionality will be implemented here.</p>
+            </div>
+
+            <div id="users-tab" class="admin-tab-content">
+                <h2>User Management</h2>
+                <p>User management functionality will be implemented here.</p>
+            </div>
+
+            <div id="reports-tab" class="admin-tab-content">
+                <h2>Reports</h2>
+                <p>Reporting functionality will be implemented here.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/venue-icon.png" alt="Venue Manager" class="logo-icon">
+                        <span class="logo-text">Venue Manager</span>
+                    </div>
+                    <p>Streamlining venue management for educational institutions</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="venues.html">Venues</a></li>
+                        <li><a href="booking.html">Book Now</a></li>
+                        <li><a href="my-bookings.html">My Bookings</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@venuemanager.edu</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Venue Manager System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
+
