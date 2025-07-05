@@ -250,7 +250,7 @@ function logout() {
 
 // Load venues data
 function loadVenues() {
-    // Sample venue data (in real app, this would come from backend)
+    // Sample venue data
     venues = [
         {
             id: 1,
@@ -284,6 +284,10 @@ function loadVenues() {
             facilities: ['computer', 'whiteboard'],
             image: 'images/classroom-modern.jpg',
             status: 'booked'
+        },
+        {
+            id: 4,
+            name: ''
         }
     ];
 }
@@ -643,4 +647,26 @@ function logout() {
         }, 1500);
     }
 }
+// Add event listener for user menu click
+document.getElementById('user-menu').addEventListener('click', function(event) {
+    event.preventDefault();
+    if (currentUser) {
+        showUserDropdown();
+    } else {
+        window.location.href = 'login.html';
+    }
+});
+
+// Add event listener for profile link click
+document.getElementById('profile').addEventListener('click', function(event) {
+    event.preventDefault();
+    if (currentUser) {
+        window.location.href = 'profile.html';
+    } else {
+        showMessage('Please sign in to access your profile', 'warning');
+        window.location.href = 'login.html';
+    }
+});
+
+// Add event listener for 
 

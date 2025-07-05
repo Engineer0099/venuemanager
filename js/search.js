@@ -62,7 +62,7 @@ function performVenueSearch(criteria) {
             }
         }
         
-        // Check availability (simplified - in real app would check against bookings)
+        // Check availability 
         if (venue.status === 'booked') {
             return false;
         }
@@ -78,8 +78,6 @@ function performVenueSearch(criteria) {
 
 // Check if venue is booked at specific time
 function isVenueBookedAtTime(venueId, date, startTime, endTime) {
-    // In a real application, this would check against the database
-    // For demo purposes, we'll simulate some bookings
     const simulatedBookings = [
         {
             venueId: 1,

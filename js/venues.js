@@ -85,7 +85,79 @@ function loadExtendedVenues() {
             image: 'assets/twoone.jpg',
             status: 'timetable',
             description: 'Large lecture venue suitable for exams and presentations with a lot of attendees.'
-        }
+        },
+        {
+            id: 7,
+            name: 'LB 2-3',
+            location: 'New Block B, Second Floor',
+            capacity: 200,
+            examCapacity1: 100,
+            examCapacity2: 80,
+            facilities: ['whiteboard','projector'],
+            image: 'assets/LB1.jpg',
+            status: 'booked',
+            description: 'Large lecture venue suitable for exams and presentations with a lot of attendees.'
+        },
+        {
+            id: 8,
+            name: 'LB 3-1',
+            location: 'New Block B, Third Floor',
+            capacity: 200,
+            examCapacity1: 100,
+            examCapacity2: 80,
+            facilities: ['whiteboard','projector'],
+            image: 'assets/LB2.jpg',
+            status: 'free',
+            description: 'Large lecture venue suitable for exams and presentations with a lot of attendees.'
+        },
+        {
+            id: 9,
+            name: 'LB 3-2',
+            location: 'New Block B, Third Floor',
+            capacity: 200,
+            examCapacity1: 100,
+            examCapacity2: 80,
+            facilities: ['whiteboard','projector'],
+            image: 'assets/LB3.jpg',
+            status: 'timetable',
+            description: 'Large lecture venue suitable for exams and presentations with a lot of attendees.'
+        },
+        {
+            id: 10,
+            name: 'B 2-5',
+            location: 'Administration Block',
+            capacity: 150,
+            examCapacity1: 75,
+            examCapacity2: 70,
+            facilities: ['whiteboard','projector'],
+            image: 'assets/B1.jpg',
+            status: 'free',
+            description: 'Clear venue for presentation with small number of attendees'
+        },
+        {
+            id: 11,
+            name: 'B 2-6',
+            location: 'Administration Block',
+            capacity: 150,
+            examCapacity1: 75,
+            examCapacity2: 70,
+            facilities: ['whiteboard','projector'],
+            image: 'assets/B2.jpg',
+            status: 'booked',
+            description: 'Clear venue for presentation with small number of attendees'
+        },
+        {
+            id: 12,
+            name: 'B 2-7',
+            location: 'Administration Block',
+            capacity: 150,
+            examCapacity1: 75,
+            examCapacity2: 70,
+            facilities: ['whiteboard','projector'],
+            image: 'assets/B3.jpg',
+            status: 'timetable',
+            description: 'Clear venue for presentation, and computer practicals with small number of attendees'
+        },
     ];
     // Fetch venues from PHP backend
     fetch('http://localhost/venue-manager/api/users/create.php')

@@ -20,7 +20,7 @@
                 <a href="venues.html" class="nav-link">Venues</a>
                 <a href="booking.html" class="nav-link">Book Now</a>
                 <a href="my-bookings.html" class="nav-link user-only" style="display: none;">My Bookings</a>
-                <a href="profile.html" class="nav-link user-only" style="display: none;">Profile</a>
+                <a href="profile.html" class="nav-link user-only" id="profile" style="display: none;">Profile</a>
                 <a href="admin.html" class="nav-link active admin-link" id="admin-link" style="display: none;">Admin</a>
                 <a href="login.html" class="nav-link" id="sign-in">Sign In</a>
                 <a href="#" class="nav-link user-menu" id="user-menu" style="display: none;">Welcome, User</a>
@@ -215,10 +215,10 @@
                             <label for="venue-filter">Venue:</label>
                             <select id="venue-filter" onchange="filterTimetable()">
                                 <option value="">All Venues</option>
-                                <option value="conference-a">Conference Room A</option>
-                                <option value="lecture-b">Lecture Hall B</option>
-                                <option value="seminar-c">Seminar Room C</option>
-                                <option value="computer-d">Computer Lab D</option>
+                                <option value="conference-a">lecture Hall Tent 1</option>
+                                <option value="lecture-b">Lecture Hall LB 3-1</option>
+                                <option value="seminar-c">Lecture Hall LB 3-2</option>
+                                <option value="computer-d">Computer Lab 2-5</option>
                             </select>
                         </div>
                         <div class="filter-group">
@@ -235,9 +235,9 @@
                             <label for="lecturer-filter">Lecturer:</label>
                             <select id="lecturer-filter" onchange="filterTimetable()">
                                 <option value="">All Lecturers</option>
-                                <option value="john-smith">John Smith</option>
-                                <option value="sarah-johnson">Sarah Johnson</option>
-                                <option value="mike-wilson">Mike Wilson</option>
+                                <option value="john-smith">Frank Tarimo</option>
+                                <option value="sarah-johnson">Jackline kisela</option>
+                                <option value="mike-wilson">Daudi Selemani</option>
                             </select>
                         </div>
                     </div>

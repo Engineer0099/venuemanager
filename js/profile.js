@@ -41,17 +41,17 @@ function loadUserProfile() {
 // Populate profile data in the UI
 function populateProfileData() {
     // Header information
-    document.getElementById('profile-name').textContent = `${userProfile.firstName} ${userProfile.lastName}`;
+    document.getElementById('profile-name').textContent = `${userProfile.fname} ${userProfile.lname}`;
     document.getElementById('profile-role').textContent = userProfile.role.charAt(0).toUpperCase() + userProfile.role.slice(1);
     document.getElementById('profile-email').textContent = userProfile.email;
     
     // Avatar initials
-    const initials = `${userProfile.firstName.charAt(0)}${userProfile.lastName.charAt(0)}`.toUpperCase();
+    const initials = `${userProfile.fname.charAt(0)}${userProfile.lname.charAt(0)}`.toUpperCase();
     document.getElementById('avatar-initials').textContent = initials;
     
     // Personal information form
-    document.getElementById('first-name').value = userProfile.firstName || '';
-    document.getElementById('last-name').value = userProfile.lastName || '';
+    document.getElementById('first-name').value = userProfile.fname || '';
+    document.getElementById('last-name').value = userProfile.lname || '';
     document.getElementById('title').value = userProfile.title || '';
     document.getElementById('phone').value = userProfile.phone || '';
     document.getElementById('department').value = userProfile.department || '';
@@ -151,8 +151,8 @@ function handlePersonalInfoSubmit(event) {
     
     const formData = new FormData(event.target);
     const updatedData = {
-        firstName: formData.get('firstName'),
-        lastName: formData.get('lastName'),
+        fname: formData.get('fname'),
+        lname: formData.get('lname'),
         title: formData.get('title'),
         phone: formData.get('phone'),
         department: formData.get('department'),
@@ -164,8 +164,8 @@ function handlePersonalInfoSubmit(event) {
     
     // Update current user session
     Object.assign(currentUser, {
-        firstName: updatedData.firstName,
-        lastName: updatedData.lastName
+        fname: updatedData.fname,
+        lname: updatedData.lname
     });
     
     // Save to localStorage
@@ -262,8 +262,8 @@ function handlePasswordSubmit(event) {
 
 // Reset personal information form
 function resetPersonalForm() {
-    document.getElementById('first-name').value = originalProfile.firstName || '';
-    document.getElementById('last-name').value = originalProfile.lastName || '';
+    document.getElementById('first-name').value = originalProfile.fname || '';
+    document.getElementById('last-name').value = originalProfile.lname || '';
     document.getElementById('title').value = originalProfile.title || '';
     document.getElementById('phone').value = originalProfile.phone || '';
     document.getElementById('department').value = originalProfile.department || '';
